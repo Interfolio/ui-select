@@ -252,6 +252,19 @@ uis.controller('uiSelectCtrl',
       //TODO should implement for single mode removeSelected
       if (ctrl.isEmpty() || (angular.isArray(selectedItems) && !selectedItems.length) || !ctrl.multiple || !ctrl.removeSelected) {
         ctrl.setItemsFn(data);
+
+        if (data.length !== 0) {
+          // Add voice over notification message when we have the items to choose
+          // in the list. By default the first item is selected and we need to notify
+          // user about it.
+          $timeout(function () {
+            var message = 'Now you have ' + data.length + ' items to choose. The currently selected item is ' + data[0].name;
+
+            $element
+              .find('.ui-select-visually-hidden.ui-select-dropdown-notification')
+              .text(message);
+          }, 1000);
+        }
       }else{
         if ( data !== undefined && data !== null ) {
           var filteredItems = data.filter(function(i) {

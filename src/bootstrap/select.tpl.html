@@ -1,23 +1,17 @@
 <div class="ui-select-container ui-select-bootstrap dropdown" ng-class="{open: $select.open}">
   <div class="ui-select-match"></div>
-  <span ng-show="$select.open && $select.refreshing  && $select.spinnerEnabled" class="ui-select-refreshing {{$select.spinnerClass}}"></span>
+  <span ng-show="$select.open && $select.refreshing  && $select.spinnerEnabled"
+    class="ui-select-refreshing {{$select.spinnerClass}}"></span>
 
-  <div
-    role='combobox'
-    aria-haspopup="listbox"
-    aria-expanded="false"
+  <div role='combobox' aria-haspopup="listbox" aria-live="polite" aria-expanded="false"
     aria-owns="ui-select-choices-{{ $select.generatedId }}">
 
-    <input
-          type="search"
-          autocomplete="off"
-          tabindex="-1"
-          placeholder="{{$select.placeholder}}"
-          class="form-control ui-select-search"
-          aria-label="{{ $select.baseTitle }}"
-          ng-class="{ 'ui-select-search-hidden' : !$select.searchEnabled }"
-          ng-model="$select.search"
-          ng-show="$select.open">
+    <p class="ui-select-dropdown-notification ui-select-visually-hidden" aria-live="assertive"></p>
+
+    <input type="search" autocomplete="off" tabindex="-1" placeholder="{{$select.placeholder}}"
+      class="form-control ui-select-search" aria-label="{{ $select.baseTitle }}" aria-live="polite"
+      ng-class="{ 'ui-select-search-hidden' : !$select.searchEnabled }" ng-model="$select.search"
+      ng-show="$select.open">
   </div>
 
   <div ng-show="$select.open && $select.items.length > 0" class="ui-select-dropdown dropdown-menu">
