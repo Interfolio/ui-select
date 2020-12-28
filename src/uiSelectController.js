@@ -754,14 +754,17 @@ uis.controller('uiSelectCtrl',
   });
 
   $scope.$watch('$select.activeIndex', function(activeIndex) {
-    if (activeIndex != null)
-      $element.find('input').attr(
-        'aria-activedescendant',
-        'ui-select-choices-row-' + ctrl.generatedId + '-' + activeIndex);
+    if (activeIndex != null) {
+      var id = 'ui-select-choices-row-' + ctrl.generatedId + '-' + activeIndex;
+      $element.find('input').attr('aria-activedescendant', id);
+      $element.find('input').parent().attr('aria-expanded', 'true');
+    }
   });
 
   $scope.$watch('$select.open', function(open) {
-    if (!open)
+    if (!open) {
       $element.find('input').removeAttr('aria-activedescendant');
+      $element.find('input').parent().attr('aria-expanded', 'false');
+    }
   });
 }]);
