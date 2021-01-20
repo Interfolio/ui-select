@@ -12,7 +12,7 @@
       role="region">
     </div>
 
-    <input type="search" autocomplete="off" tabindex="-1" placeholder="{{$select.placeholder}}"
+    <input type="search" autocomplete="off" tabindex="-1" placeholder="{{$select.placeholder}}" aria-required="true"
       class="form-control ui-select-search" aria-label="{{ $select.baseTitle }}"
       ng-class="{ 'ui-select-search-hidden' : !$select.searchEnabled }" ng-model="$select.search"
       ng-show="$select.open">
