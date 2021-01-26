@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.20.0 - 2021-01-21T10:11:56.743Z
+ * Version: 0.20.0 - 2021-01-26T08:11:47.358Z
  * License: MIT
  */
 
@@ -1087,7 +1087,7 @@ uis.controller('uiSelectCtrl',
      else {
       var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
       $element.find('input').removeAttr('aria-labelledby');
-      $element.find('input').attr('aria-describedby', matchTextId);
+      if (ctrl.open) $element.find('input').attr('aria-describedby', matchTextId);
     }
   });
 
@@ -1138,6 +1138,7 @@ uis.directive('uiSelect',
         $select.baseTitle = attrs.title || 'Select box';
         $select.focusserTitle = $select.baseTitle;
         $select.required = attrs.required || false;
+        $select.description = attrs.description;
         $select.focusserId = 'focusser-' + $select.generatedId;
 
         $select.closeOnSelect = function() {
@@ -2259,7 +2260,7 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
       });
 
       //Idea from: https://github.com/ivaynberg/select2/blob/79b5bf6db918d7560bdd959109b7bcfb47edaf43/select2.js#L1954
-      var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-required='{{ $select.required }}' aria-haspopup='true' role='combobox' />");
+      var focusser = angular.element("<input ng-disabled='$select.disabled' class='ui-select-focusser ui-select-offscreen' type='text' id='{{ $select.focusserId }}' aria-label='{{ $select.focusserTitle }}' aria-describedby='{{ $select.description }}' aria-required='{{ $select.required }}' aria-haspopup='true' role='combobox' />");
       $compile(focusser)(scope);
       $select.focusser = focusser;
 

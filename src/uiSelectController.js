@@ -810,7 +810,7 @@ uis.controller('uiSelectCtrl',
      else {
       var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
       $element.find('input').removeAttr('aria-labelledby');
-      $element.find('input').attr('aria-describedby', matchTextId);
+      if (ctrl.open) $element.find('input').attr('aria-describedby', matchTextId);
     }
   });
 
