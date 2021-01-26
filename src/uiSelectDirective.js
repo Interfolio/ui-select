@@ -43,6 +43,7 @@ uis.directive('uiSelect',
         $select.baseTitle = attrs.title || 'Select box';
         $select.focusserTitle = $select.baseTitle;
         $select.required = attrs.required || false;
+        $select.description = attrs.description;
         $select.focusserId = 'focusser-' + $select.generatedId;
 
         $select.closeOnSelect = function() {
