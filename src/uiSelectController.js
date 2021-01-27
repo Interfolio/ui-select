@@ -806,6 +806,8 @@ uis.controller('uiSelectCtrl',
       var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
       $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
+    } else {
+      $element.find('input').removeAttr('aria-labelledby');
     }
   });
 
