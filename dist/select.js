@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.20.0 - 2021-01-26T08:11:47.358Z
+ * Version: 0.20.0 - 2021-01-27T07:17:17.329Z
  * License: MIT
  */
 
@@ -1084,11 +1084,12 @@ uis.controller('uiSelectCtrl',
       $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
     }
-     else {
-      var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
-      $element.find('input').removeAttr('aria-labelledby');
-      if (ctrl.open) $element.find('input').attr('aria-describedby', matchTextId);
-    }
+  });
+
+  $scope.$watch('$select.selected', function(selected) {
+    var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+    $element.find('input').removeAttr('aria-labelledby');
+    $element.find('input').attr('aria-describedby', matchTextId);
   });
 
 }]);
