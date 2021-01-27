@@ -808,6 +808,10 @@ uis.controller('uiSelectCtrl',
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
       $element.find('input').removeAttr('aria-labelledby');
+      if (ctrl.selected) {
+        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+        $element.find('input').attr('aria-describedby', matchTextId);
+      }
     }
   });
 
