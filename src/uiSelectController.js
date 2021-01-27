@@ -806,12 +806,19 @@ uis.controller('uiSelectCtrl',
       var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
       $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
-    }
-     else {
-      var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+    } else {
       $element.find('input').removeAttr('aria-labelledby');
-      if (ctrl.open) $element.find('input').attr('aria-describedby', matchTextId);
+      if (ctrl.selected) {
+        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+        $element.find('input').attr('aria-describedby', matchTextId);
+      }
     }
+  });
+
+  $scope.$watch('$select.selected', function(selected) {
+    var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+    $element.find('input').removeAttr('aria-labelledby');
+    $element.find('input').attr('aria-describedby', matchTextId);
   });
 
 }]);
