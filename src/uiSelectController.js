@@ -808,17 +808,32 @@ uis.controller('uiSelectCtrl',
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
       $element.find('input').removeAttr('aria-labelledby');
-      if (ctrl.selected) {
-        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
-        $element.find('input').attr('aria-describedby', matchTextId);
+      var selected = ctrl.selected;
+      if (selected) {
+        var name = ctrl.name;
+        if (name) {
+          $element.find('input').val(selected[name]);
+          $element.find('input').removeAttr('aria-describedby');
+        } else {
+          var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+          $element.find('input').attr('aria-describedby', matchTextId);
+        }
       }
     }
   });
 
   $scope.$watch('$select.selected', function(selected) {
-    var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
-    $element.find('input').removeAttr('aria-labelledby');
-    $element.find('input').attr('aria-describedby', matchTextId);
+    if (selected) {
+      $element.find('input').removeAttr('aria-labelledby');
+      var name = ctrl.name;
+      if (name) {
+        $element.find('input').val(selected[name]);
+        $element.find('input').removeAttr('aria-describedby');
+      } else {
+        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+        $element.find('input').attr('aria-describedby', matchTextId);
+      }
+    }
   });
 
 }]);
