@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.20.0 - 2021-01-30T06:38:24.625Z
+ * Version: 0.20.0 - 2021-01-30T08:09:56.441Z
  * License: MIT
  */
 
@@ -1080,7 +1080,6 @@ uis.controller('uiSelectCtrl',
 
   function readSelected(selected) {
     if (selected) {
-      $element.find('input').removeAttr('aria-labelledby');
       var name = ctrl.name;
       if (name) {
         if (name.includes(' ')) {
@@ -1108,6 +1107,7 @@ uis.controller('uiSelectCtrl',
       $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
+      $element.find('input').removeAttr('aria-labelledby');
       var selected = ctrl.selected;
       // For reading default selected value
       readSelected(selected);
@@ -1115,6 +1115,7 @@ uis.controller('uiSelectCtrl',
   });
 
   $scope.$watch('$select.selected', function(selected) {
+    $element.find('input').removeAttr('aria-labelledby');
     // For reading user selected value
     readSelected(selected);
   });
