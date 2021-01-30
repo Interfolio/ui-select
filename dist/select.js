@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.20.0 - 2021-01-29T15:31:42.797Z
+ * Version: 0.20.0 - 2021-01-30T06:10:16.497Z
  * License: MIT
  */
 
@@ -1084,12 +1084,22 @@ uis.controller('uiSelectCtrl',
       $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
-      $element.find('input').removeAttr('aria-labelledby');
       var selected = ctrl.selected;
       if (selected) {
+        $element.find('input').removeAttr('aria-labelledby');
         var name = ctrl.name;
         if (name) {
-          $element.find('input').val(selected[name]);
+          if (name.includes(' ')) {
+            var fields = name.split(' ');
+            var result = [];
+            fields.forEach(function (field) {
+              result.push(selected[field]);
+            });
+            var selectValue = result.join(' ');
+            $element.find('input').val(selectValue);
+          } else {
+            $element.find('input').val(selected[name]);
+          }
           $element.find('input').removeAttr('aria-describedby');
         } else {
           var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
@@ -1104,7 +1114,17 @@ uis.controller('uiSelectCtrl',
       $element.find('input').removeAttr('aria-labelledby');
       var name = ctrl.name;
       if (name) {
-        $element.find('input').val(selected[name]);
+        if (name.includes(' ')) {
+          var fields = name.split(' ');
+          var result = [];
+          fields.forEach(function (field) {
+            result.push(selected[field]);
+          });
+          var selectValue = result.join(' ');
+          $element.find('input').val(selectValue);
+        } else {
+          $element.find('input').val(selected[name]);
+        }
         $element.find('input').removeAttr('aria-describedby');
       } else {
         var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
