@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.20.0 - 2021-01-30T06:10:16.497Z
+ * Version: 0.20.0 - 2021-01-30T06:38:24.625Z
  * License: MIT
  */
 
@@ -1078,38 +1078,7 @@ uis.controller('uiSelectCtrl',
     }
   });
 
-  $scope.$watch('$select.items', function(items) {
-    if (items.length === 0) {
-      var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
-      $element.find('input').removeAttr('aria-labelledby');
-      $element.find('input').attr('aria-labelledby', noChoiceId);
-    } else {
-      var selected = ctrl.selected;
-      if (selected) {
-        $element.find('input').removeAttr('aria-labelledby');
-        var name = ctrl.name;
-        if (name) {
-          if (name.includes(' ')) {
-            var fields = name.split(' ');
-            var result = [];
-            fields.forEach(function (field) {
-              result.push(selected[field]);
-            });
-            var selectValue = result.join(' ');
-            $element.find('input').val(selectValue);
-          } else {
-            $element.find('input').val(selected[name]);
-          }
-          $element.find('input').removeAttr('aria-describedby');
-        } else {
-          var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
-          $element.find('input').attr('aria-describedby', matchTextId);
-        }
-      }
-    }
-  });
-
-  $scope.$watch('$select.selected', function(selected) {
+  function readSelected(selected) {
     if (selected) {
       $element.find('input').removeAttr('aria-labelledby');
       var name = ctrl.name;
@@ -1131,6 +1100,23 @@ uis.controller('uiSelectCtrl',
         $element.find('input').attr('aria-describedby', matchTextId);
       }
     }
+  }
+
+  $scope.$watch('$select.items', function(items) {
+    if (items.length === 0) {
+      var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
+      $element.find('input').removeAttr('aria-labelledby');
+      $element.find('input').attr('aria-labelledby', noChoiceId);
+    } else {
+      var selected = ctrl.selected;
+      // For reading default selected value
+      readSelected(selected);
+    }
+  });
+
+  $scope.$watch('$select.selected', function(selected) {
+    // For reading user selected value
+    readSelected(selected);
   });
 
 }]);
