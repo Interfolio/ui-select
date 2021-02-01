@@ -801,6 +801,29 @@ uis.controller('uiSelectCtrl',
     }
   });
 
+  function readSelected(selected) {
+    if (selected) {
+      var name = ctrl.name;
+      if (name) {
+        if (name.includes(' ')) {
+          var fields = name.split(' ');
+          var result = [];
+          fields.forEach(function (field) {
+            result.push(selected[field]);
+          });
+          var selectValue = result.join(' ');
+          $element.find('input').val(selectValue);
+        } else {
+          $element.find('input').val(selected[name]);
+        }
+        $element.find('input').removeAttr('aria-describedby');
+      } else {
+        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
+        $element.find('input').attr('aria-describedby', matchTextId);
+      }
+    }
+  }
+
   $scope.$watch('$select.items', function(items) {
     if (items.length === 0) {
       var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
@@ -808,17 +831,16 @@ uis.controller('uiSelectCtrl',
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
       $element.find('input').removeAttr('aria-labelledby');
-      if (ctrl.selected) {
-        var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
-        $element.find('input').attr('aria-describedby', matchTextId);
-      }
+      var selected = ctrl.selected;
+      // For reading default selected value
+      readSelected(selected);
     }
   });
 
   $scope.$watch('$select.selected', function(selected) {
-    var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
     $element.find('input').removeAttr('aria-labelledby');
-    $element.find('input').attr('aria-describedby', matchTextId);
+    // For reading user selected value
+    readSelected(selected);
   });
 
 }]);
