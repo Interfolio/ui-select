@@ -75,12 +75,14 @@ uis.directive('uiSelectSingle', ['$timeout','$compile', function($timeout, $comp
       scope.$on('uis:close', function (event, skipFocusser) {
         $timeout(function(){
           $select.focusser.prop('disabled', false);
+          focusser.attr('aria-hidden', false);
           if (!skipFocusser) $select.focusser[0].focus();
         },0,false);
       });
 
       scope.$on('uis:activate', function () {
         focusser.prop('disabled', true); //Will reactivate it on .close()
+        focusser.attr('aria-hidden', true);
       });
 
       //Idea from: https://github.com/ivaynberg/select2/blob/79b5bf6db918d7560bdd959109b7bcfb47edaf43/select2.js#L1954

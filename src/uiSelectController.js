@@ -600,6 +600,10 @@ uis.controller('uiSelectCtrl',
   function _handleDropDownSelection(key) {
     var processed = true;
     switch (key) {
+      case KEY.RIGHT:
+      case KEY.LEFT:
+        $element.find('input').removeAttr('aria-activedescendant');
+        break;
       case KEY.DOWN:
         if (!ctrl.open && ctrl.multiple) ctrl.activate(false, true); //In case its the search input in 'multiple' mode
         else if (ctrl.activeIndex <= ctrl.items.length - 1) {
@@ -801,6 +805,14 @@ uis.controller('uiSelectCtrl',
     }
   });
 
+  function addValueToInput(value) {
+    if (!ctrl.open) {
+      $element.find('input').val(value);
+    } else {
+      $element.find('input').val(ctrl.search);
+    }
+  }
+
   function readSelected(selected) {
     if (selected) {
       var name = ctrl.name;
@@ -812,9 +824,9 @@ uis.controller('uiSelectCtrl',
             result.push(selected[field]);
           });
           var selectValue = result.join(' ');
-          $element.find('input').val(selectValue);
+          addValueToInput(selectValue);
         } else {
-          $element.find('input').val(selected[name]);
+          addValueToInput(selected[name]);
         }
         $element.find('input').removeAttr('aria-describedby');
       } else {
@@ -825,22 +837,20 @@ uis.controller('uiSelectCtrl',
   }
 
   $scope.$watch('$select.items', function(items) {
+    $element.find('input').removeAttr('aria-labelledby');
     if (items.length === 0) {
       var noChoiceId = 'ui-select-no-choice-' + ctrl.generatedId;
-      $element.find('input').removeAttr('aria-labelledby');
       $element.find('input').attr('aria-labelledby', noChoiceId);
     } else {
       $element.find('input').removeAttr('aria-labelledby');
       var selected = ctrl.selected;
-      // For reading default selected value
-      readSelected(selected);
+      readSelected(selected); // For reading default selected value
     }
   });
 
   $scope.$watch('$select.selected', function(selected) {
     $element.find('input').removeAttr('aria-labelledby');
-    // For reading user selected value
-    readSelected(selected);
+    readSelected(selected); // For reading user selected value
   });
 
 }]);
