@@ -273,7 +273,6 @@ uis.controller('uiSelectCtrl',
           var message = data[0].name + ' 1 of ' + data.length;
           var digest = Math.random();
 
-          // setNotification(message + '<span style="display: none;">' + digest + '</span>');
         }
       }else{
         if ( data !== undefined && data !== null ) {
