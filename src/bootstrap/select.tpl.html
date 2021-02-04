@@ -13,7 +13,7 @@
     </div>
 
     <input type="search" autocomplete="off" tabindex="-1" placeholder="{{$select.placeholder}}" aria-required="{{ $select.required }}"
-      class="form-control ui-select-search" aria-label="{{ $select.baseTitle }}"
+      class="form-control ui-select-search" aria-label="{{ $select.baseTitle }}" aria-controls="ui-select-choices-{{ $select.generatedId }}"
       ng-class="{ 'ui-select-search-hidden' : !$select.searchEnabled }" ng-model="$select.search"
       ng-show="$select.open">
   </div>
