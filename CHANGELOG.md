@@ -1,3 +1,15 @@
+<a name="0.21.0"></a>
+# [0.21.0](https://github.com/Interfolio/ui-select/compare/v0.21.0...v0.21.0) (2021-02-08)
+
+
+
+
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/Interfolio/ui-select/compare/v0.21.0...v0.20.0) (2021-02-08)
+
+
+
+
 <a name="0.19.8"></a>
 ## [0.19.8](https://github.com/angular-ui/ui-select/compare/v0.19.7...v0.19.8) (2017-04-15)
 
