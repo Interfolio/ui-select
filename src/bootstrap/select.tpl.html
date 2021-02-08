@@ -6,12 +6,6 @@
   <div role='combobox' aria-haspopup="listbox" aria-expanded="false"
     aria-owns="ui-select-choices-{{ $select.generatedId }}">
 
-    <div
-      class="ui-select-dropdown-notification ui-select-visually-hidden"
-      aria-live="assertive"
-      role="region">
-    </div>
-
     <input type="search" autocomplete="off" tabindex="-1" aria-autocomplete="list" placeholder="{{$select.placeholder}}" aria-required="{{ $select.required }}"
       class="form-control ui-select-search" aria-label="{{ $select.baseTitle }}" aria-controls="ui-select-choices-{{ $select.generatedId }}"
       ng-class="{ 'ui-select-search-hidden' : !$select.searchEnabled }" ng-model="$select.search"
