@@ -46,12 +46,6 @@ uis.controller('uiSelectCtrl',
   ctrl.$filter = $filter;
   ctrl.$element = $element;
 
-  var setNotification = function (message) {
-    $element
-      .find('.ui-select-visually-hidden.ui-select-dropdown-notification')
-      .html(message);
-  };
-
   // Use $injector to check for $animate and store a reference to it
   ctrl.$animate = (function () {
     try {
@@ -304,7 +298,6 @@ uis.controller('uiSelectCtrl',
           //Remove already selected items (ex: while searching)
           //TODO Should add a test
           // Remove the previous VoiceOver message.
-          setNotification('');
 
           ctrl.refreshItems(items);
 
