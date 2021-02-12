@@ -113,7 +113,8 @@ var uis = angular.module('ui.select', [])
   appendToBody: false,
   spinnerEnabled: false,
   spinnerClass: 'glyphicon glyphicon-refresh ui-select-spin',
-  backspaceReset: true
+  backspaceReset: true,
+  descriptionId: ''
 })
 
 // See Rename minErr and make it accessible from outside https://github.com/angular/angular.js/issues/6913

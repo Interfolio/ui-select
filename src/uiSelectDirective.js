@@ -45,7 +45,14 @@ uis.directive('uiSelect',
         $select.focusserTitle = $select.baseTitle;
         $select.required = attrs.required || false;
         $select.description = attrs.description;
+        $select.descriptionId = attrs.descriptionId;
         $select.focusserId = 'focusser-' + $select.generatedId;
+
+        if ($select.descriptionId) {
+          $select.describedby = $select.descriptionId;
+        } else if ($select.description) {
+          $select.describedby = 'ui-select-description-' + $select.generatedId;
+        }
 
         $select.closeOnSelect = function() {
           if (angular.isDefined(attrs.closeOnSelect)) {

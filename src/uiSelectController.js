@@ -821,6 +821,9 @@ uis.controller('uiSelectCtrl',
           addValueToInput(selected[name]);
         }
         $element.find('input').removeAttr('aria-describedby');
+        if (ctrl.multiple) {
+          $element.find('input').attr('aria-describedby', ctrl.describedby);
+        }
       } else {
         var matchTextId = 'ui-select-match-text-' + ctrl.generatedId;
         $element.find('input').attr('aria-describedby', matchTextId);
